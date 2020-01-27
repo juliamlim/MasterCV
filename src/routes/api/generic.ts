@@ -2,9 +2,9 @@ import express from 'express';
 import { PrismaClient } from '@prisma/client';
 import { prismaResponse } from '../utils';
  
-const prisma = new PrismaClient();
+const prisma: any = new PrismaClient();
 
-export default function createRouter(key, include = {}) {
+export default function createRouter(key: string, include = {}) {
     const router = express.Router();
 
     router.route('/')
