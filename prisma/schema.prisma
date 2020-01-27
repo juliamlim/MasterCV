@@ -1,0 +1,91 @@
+datasource db {
+  provider = "mysql"
+  url = env("MYSQL_DB")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x"]
+}
+
+model User {
+  id String @default(cuid()) @id
+  updatedAt DateTime @default(now()) @updatedAt
+  name String
+  email String @unique
+  website String?
+  phone String?
+  location String?
+  meta String?
+  summary Summary[]
+}
+
+model Summary {
+  id String @default(cuid()) @id
+  updatedAt DateTime @default(now()) @updatedAt
+  value String
+  user User
+}
+
+model Role {
+  id String @default(cuid()) @id
+  updatedAt DateTime @default(now()) @updatedAt
+  title String
+  location String?
+  company String
+  start DateTime
+  end DateTime?
+  notes String?
+  user User
+  description Description[]
+}
+
+model Description {
+  id String @default(cuid()) @id
+  updatedAt DateTime @default(now()) @updatedAt
+  value String
+  role Role
+}
+
+model Education {
+  id String @default(cuid()) @id
+  updatedAt DateTime @default(now()) @updatedAt
+  accreditation String
+  insitution String
+  start DateTime
+  end DateTime?
+  notes String?
+  user User
+}
+
+model Category {
+  id String @default(cuid()) @id
+  name String
+}
+
+model Skills {
+  id String @default(cuid()) @id
+  name String
+  note String?
+  category Category?
+  user User
+}
+
+model Volunteer {
+  id String @default(cuid()) @id
+  updatedAt DateTime @default(now()) @updatedAt
+  role String?
+  insitution String
+  start DateTime
+  end DateTime?
+  notes String?
+  user User
+}
+
+model Hobbies {
+  id String @default(cuid()) @id
+  updatedAt DateTime @default(now()) @updatedAt
+  name String
+  notes String?
+  user User
+}
