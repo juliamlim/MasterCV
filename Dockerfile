@@ -4,6 +4,8 @@ COPY . .
 
 RUN npm install
 
+RUN npx prisma2 generate
+
 RUN npm run build
 
 EXPOSE 8080
